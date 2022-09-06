@@ -17,6 +17,9 @@ class MultiSelectDialogField<V> extends FormField<List<V>> {
   /// Set text that is displayed on the button.
   final Text? buttonText;
 
+  /// This padding is in addition to any padding inherent in the [buttonText];
+  final EdgeInsetsGeometry? buttonTextPadding;
+
   /// Specify the button icon.
   final Icon? buttonIcon;
 
@@ -111,6 +114,7 @@ class MultiSelectDialogField<V> extends FormField<List<V>> {
     required this.onConfirm,
     this.title,
     this.buttonText,
+    this.buttonTextPadding,
     this.buttonIcon,
     this.buttonPrefixIcon,
     this.listType,
@@ -153,6 +157,7 @@ class MultiSelectDialogField<V> extends FormField<List<V>> {
                 title: title,
                 items: items,
                 buttonText: buttonText,
+                buttonTextPadding: buttonTextPadding,
                 buttonIcon: buttonIcon,
                 buttonPrefixIcon: buttonPrefixIcon,
                 chipDisplay: chipDisplay,
@@ -190,6 +195,7 @@ class _MultiSelectDialogFieldView<V> extends StatefulWidget {
   final MultiSelectListType? listType;
   final BoxDecoration? decoration;
   final Text? buttonText;
+  final EdgeInsetsGeometry? buttonTextPadding;
   final Icon? buttonIcon;
   final Icon? buttonPrefixIcon;
   final Widget? title;
@@ -223,6 +229,7 @@ class _MultiSelectDialogFieldView<V> extends StatefulWidget {
     required this.items,
     this.title,
     this.buttonText,
+    this.buttonTextPadding,
     this.buttonIcon,
     this.buttonPrefixIcon,
     this.listType,
@@ -258,6 +265,7 @@ class _MultiSelectDialogFieldView<V> extends StatefulWidget {
       : items = field.items,
         title = field.title,
         buttonText = field.buttonText,
+        buttonTextPadding = field.buttonTextPadding,
         buttonIcon = field.buttonIcon,
         buttonPrefixIcon = field.buttonPrefixIcon,
         listType = field.listType,
@@ -443,12 +451,16 @@ class __MultiSelectDialogFieldViewState<V>
                 children: [
                   widget.buttonPrefixIcon ?? SizedBox.shrink(),
                   Expanded(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        widget.buttonText ?? const Text("Select"),
-                        widget.buttonIcon ?? const Icon(Icons.arrow_downward),
-                      ],
+                    child: Padding(
+                      padding:
+                          widget.buttonTextPadding ?? const EdgeInsets.all(0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          widget.buttonText ?? const Text("Select"),
+                          widget.buttonIcon ?? const Icon(Icons.arrow_downward),
+                        ],
+                      ),
                     ),
                   )
                 ],
