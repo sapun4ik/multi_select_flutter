@@ -20,6 +20,9 @@ class MultiSelectDialogField<V> extends FormField<List<V>> {
   /// Specify the button icon.
   final Icon? buttonIcon;
 
+  /// Specify the button prefix icon.
+  final Icon? buttonPrefixIcon;
+
   /// The text at the top of the dialog.
   final Widget? title;
 
@@ -109,6 +112,7 @@ class MultiSelectDialogField<V> extends FormField<List<V>> {
     this.title,
     this.buttonText,
     this.buttonIcon,
+    this.buttonPrefixIcon,
     this.listType,
     this.decoration,
     this.onSelectionChanged,
@@ -150,6 +154,7 @@ class MultiSelectDialogField<V> extends FormField<List<V>> {
                 items: items,
                 buttonText: buttonText,
                 buttonIcon: buttonIcon,
+                buttonPrefixIcon: buttonPrefixIcon,
                 chipDisplay: chipDisplay,
                 decoration: decoration,
                 listType: listType,
@@ -186,6 +191,7 @@ class _MultiSelectDialogFieldView<V> extends StatefulWidget {
   final BoxDecoration? decoration;
   final Text? buttonText;
   final Icon? buttonIcon;
+  final Icon? buttonPrefixIcon;
   final Widget? title;
   final List<MultiSelectItem<V>> items;
   final void Function(List<V>)? onSelectionChanged;
@@ -218,6 +224,7 @@ class _MultiSelectDialogFieldView<V> extends StatefulWidget {
     this.title,
     this.buttonText,
     this.buttonIcon,
+    this.buttonPrefixIcon,
     this.listType,
     this.decoration,
     this.onSelectionChanged,
@@ -252,6 +259,7 @@ class _MultiSelectDialogFieldView<V> extends StatefulWidget {
         title = field.title,
         buttonText = field.buttonText,
         buttonIcon = field.buttonIcon,
+        buttonPrefixIcon = field.buttonPrefixIcon,
         listType = field.listType,
         decoration = field.decoration,
         onSelectionChanged = field.onSelectionChanged,
@@ -432,6 +440,7 @@ class __MultiSelectDialogFieldViewState<V>
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
+                widget.buttonPrefixIcon ?? SizedBox.shrink(),
                 widget.buttonText ?? const Text("Select"),
                 widget.buttonIcon ?? const Icon(Icons.arrow_downward),
               ],
